@@ -1,0 +1,46 @@
+[
+  {
+    "id": "sample001",
+    "title": "示例资源：机器学习入门指南",
+    "type": "方法分享",
+    "url": "https://example.com/resource1",
+    "code": "abc123",
+    "codeUrl": "",
+    "codeCode": "",
+    "date": "2025-01-15",
+    "desc": "这是一个示例资源，展示如何配置文献链接和提取码"
+  },
+  {
+    "id": "sample002",
+    "title": "示例资源：深度学习论文精读",
+    "type": "论文精读",
+    "url": "https://example.com/resource2",
+    "code": "",
+    "codeUrl": "https://example.com/code2",
+    "codeCode": "xyz789",
+    "date": "2025-01-10",
+    "desc": "这是一个示例资源，展示同时包含文献和代码链接的情况"
+  },
+  {
+    "id": "sample003",
+    "title": "示例资源：数据分析工具推荐",
+    "type": "工具推荐",
+    "url": "https://example.com/resource3",
+    "code": "",
+    "codeUrl": "",
+    "codeCode": "",
+    "date": "2025-01-05",
+    "desc": "这是一个示例资源，展示仅有文献链接的情况"
+  },
+  {
+    "id": "sample004",
+    "title": "示例资源：Python数据处理代码库",
+    "type": "工具推荐",
+    "url": "",
+    "code": "",
+    "codeUrl": "https://example.com/code4",
+    "codeCode": "",
+    "date": "2025-01-01",
+    "desc": "这是一个示例资源，展示仅有代码链接的情况"
+  }
+]

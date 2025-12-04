@@ -1,0 +1,33 @@
+# IDE 配置文件
+.xhs-ide/
+.cursor/
+.vscode/
+.idea/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 日志文件
+*.log
+npm-debug.log*
+
+# 依赖目录
+node_modules/
+
+# 构建产物
+dist/
+build/
+miniprogram_npm/
+
+# 本地配置（如果有的话）
+*.local
+.env
+.env.*
+
+# 编辑器临时文件
+*.swp
+*.swo
+*~
+

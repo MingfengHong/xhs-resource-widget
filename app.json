@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "学术资源获取",
+    "navigationBarBackgroundColor": "#E8F5E9",
+    "backgroundColor": "#E8F5E9"
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "lazyCodeLoading": "requiredComponents"
+}

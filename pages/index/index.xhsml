@@ -1,0 +1,275 @@
+<!--index.xhsml-->
+<view class="page-container">
+  <!-- 加载状态 - S1 云朵动画 -->
+  <view class="loading-container" xhs:if="{{loading}}">
+    <view class="cloud-loading">
+      <view class="cloud-icon">
+        <view class="cloud-body"></view>
+        <view class="cloud-bottom"></view>
+      </view>
+      <view class="download-arrow">
+        <view class="arrow-line"></view>
+        <view class="arrow-head"></view>
+      </view>
+    </view>
+    <text class="loading-text">正在加载资源...</text>
+  </view>
+
+  <!-- 错误状态 - S5 断网云朵 -->
+  <view class="error-container" xhs:elif="{{hasError}}">
+    <view class="cloud-error">
+      <view class="cloud-icon error">
+        <view class="cloud-body"></view>
+        <view class="cloud-bottom"></view>
+        <view class="cloud-face">
+          <view class="cloud-eye left"></view>
+          <view class="cloud-eye right"></view>
+          <view class="cloud-mouth"></view>
+        </view>
+      </view>
+      <view class="disconnect-plug">
+        <view class="plug-line"></view>
+        <view class="plug-head"></view>
+      </view>
+    </view>
+    <text class="error-title">网络似乎断开了</text>
+    <button class="retry-button" bindtap="onRetryTap">重试</button>
+  </view>
+
+  <!-- 主内容区域 - S2/S3/S4 -->
+  <scroll-view class="main-content" scroll-y xhs:else>
+    <!-- 顶部搜索区域 -->
+    <view class="search-container">
+      <view class="search-box">
+        <view class="search-icon-wrapper">
+          <text class="search-icon-text">🔍</text>
+        </view>
+        <input 
+          class="search-input" 
+          placeholder="搜索笔记关键词..." 
+          value="{{searchKeyword}}"
+          bindinput="onSearchInput"
+          confirm-type="search"
+        />
+        <view class="clear-btn" xhs:if="{{searchKeyword}}" bindtap="onClearSearch">
+          <text class="clear-icon">✕</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 筛选器区域 -->
+    <view class="filter-container">
+      <view class="filter-item" bindtap="onDateFilterTap">
+        <text class="filter-text">{{selectedDateLabel}}</text>
+        <text class="filter-arrow">▼</text>
+      </view>
+      <view class="filter-item" bindtap="onTypeFilterTap">
+        <text class="filter-text">{{selectedTypeLabel}}</text>
+        <text class="filter-arrow">▼</text>
+      </view>
+      <view class="filter-item" bindtap="onFileTypeFilterTap">
+        <text class="filter-text">{{selectedFileTypeLabel}}</text>
+        <text class="filter-arrow">▼</text>
+      </view>
+    </view>
+
+    <!-- 资源列表 -->
+    <view class="resource-list">
+      <!-- 无搜索结果提示 -->
+      <view class="no-result" xhs:if="{{filteredResourceList.length === 0}}">
+        <view class="no-result-icon">📚</view>
+        <text class="no-result-text">
+          <block xhs:if="{{searchKeyword}}">未找到相关资源，请尝试其他关键词</block>
+          <block xhs:else>暂无资源数据</block>
+        </text>
+      </view>
+
+      <!-- 资源卡片列表 -->
+      <view class="resource-card" xhs:for="{{filteredResourceList}}" xhs:key="id" xhs:for-index="index">
+        <!-- 卡片头部：标题 -->
+        <view class="card-header">
+          <text class="card-title">{{item.title}}</text>
+        </view>
+        
+        <!-- 卡片元信息 -->
+        <view class="card-meta">
+          <view class="meta-item">
+            <text class="meta-icon">📅</text>
+            <text class="meta-text">{{item.date}}</text>
+          </view>
+          <view class="meta-divider">·</view>
+          <view class="meta-item">
+            <text class="meta-icon">🏷️</text>
+            <text class="meta-text">{{item.type}}</text>
+          </view>
+        </view>
+        
+        <!-- 操作按钮区域 -->
+        <view class="card-actions">
+          <!-- 有文献链接时显示"获取文献"按钮 -->
+          <button 
+            class="action-btn primary" 
+            bindtap="onCopyLinkTap" 
+            data-index="{{index}}"
+            xhs:if="{{item.url}}"
+          >
+            <text class="btn-icon">📄</text>
+            <text class="btn-text">获取文献</text>
+          </button>
+          <!-- 有代码链接时显示"获取代码"按钮 -->
+          <button 
+            class="action-btn {{item.url ? 'secondary' : 'primary'}}" 
+            bindtap="onCopyCodeTap" 
+            data-index="{{index}}"
+            xhs:if="{{item.codeUrl}}"
+          >
+            <text class="btn-icon">💻</text>
+            <text class="btn-text">获取代码</text>
+          </button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部免责声明 -->
+    <view class="footer">
+      <text class="footer-text">仅供学术交流使用</text>
+    </view>
+  </scroll-view>
+
+  <!-- Toast 提示 (自定义样式) -->
+  <view class="custom-toast" xhs:if="{{showToast}}">
+    <view class="toast-content">
+      <view class="toast-icon success">✓</view>
+      <text class="toast-text">{{toastMessage}}</text>
+    </view>
+  </view>
+
+  <!-- 日期筛选弹窗 -->
+  <view class="filter-popup-mask" xhs:if="{{showDateFilter}}" bindtap="onCloseDateFilter">
+    <view class="filter-popup" catchtap="">
+      <view class="popup-header">
+        <text class="popup-title">选择日期</text>
+        <text class="popup-close" bindtap="onCloseDateFilter">✕</text>
+      </view>
+      <scroll-view class="popup-options popup-scroll" scroll-y>
+        <view 
+          class="popup-option {{selectedDate === 'all' ? 'active' : ''}}" 
+          bindtap="onSelectDate" 
+          data-value="all"
+        >
+          <text>全部日期</text>
+        </view>
+        <view 
+          xhs:for="{{dateOptions}}" 
+          xhs:key="*this"
+          class="popup-option {{selectedDate === item ? 'active' : ''}}" 
+          bindtap="onSelectDate" 
+          data-value="{{item}}"
+        >
+          <text>{{item}}</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!-- 类型筛选弹窗 -->
+  <view class="filter-popup-mask" xhs:if="{{showTypeFilter}}" bindtap="onCloseTypeFilter">
+    <view class="filter-popup" catchtap="">
+      <view class="popup-header">
+        <text class="popup-title">选择栏目</text>
+        <text class="popup-close" bindtap="onCloseTypeFilter">✕</text>
+      </view>
+      <view class="popup-options">
+        <view 
+          class="popup-option {{selectedType === 'all' ? 'active' : ''}}" 
+          bindtap="onSelectType" 
+          data-value="all"
+        >
+          <text>全部栏目</text>
+        </view>
+        <view 
+          class="popup-option {{selectedType === '论文分享' ? 'active' : ''}}" 
+          bindtap="onSelectType" 
+          data-value="论文分享"
+        >
+          <text>📄 论文分享</text>
+        </view>
+        <view 
+          class="popup-option {{selectedType === '理论分享' ? 'active' : ''}}" 
+          bindtap="onSelectType" 
+          data-value="理论分享"
+        >
+          <text>💡 理论分享</text>
+        </view>
+        <view 
+          class="popup-option {{selectedType === '方法学习' ? 'active' : ''}}" 
+          bindtap="onSelectType" 
+          data-value="方法学习"
+        >
+          <text>🔧 方法学习</text>
+        </view>
+        <view 
+          class="popup-option {{selectedType === '工具分享' ? 'active' : ''}}" 
+          bindtap="onSelectType" 
+          data-value="工具分享"
+        >
+          <text>⚙️ 工具分享</text>
+        </view>
+        <view 
+          class="popup-option {{selectedType === '思考随笔' ? 'active' : ''}}" 
+          bindtap="onSelectType" 
+          data-value="思考随笔"
+        >
+          <text>✍️ 思考随笔</text>
+        </view>
+        <view 
+          class="popup-option {{selectedType === '阅读笔记' ? 'active' : ''}}" 
+          bindtap="onSelectType" 
+          data-value="阅读笔记"
+        >
+          <text>📚 阅读笔记</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 文件类型筛选弹窗 -->
+  <view class="filter-popup-mask" xhs:if="{{showFileTypeFilter}}" bindtap="onCloseFileTypeFilter">
+    <view class="filter-popup" catchtap="">
+      <view class="popup-header">
+        <text class="popup-title">选择文件类型</text>
+        <text class="popup-close" bindtap="onCloseFileTypeFilter">✕</text>
+      </view>
+      <view class="popup-options">
+        <view 
+          class="popup-option {{selectedFileType === 'all' ? 'active' : ''}}" 
+          bindtap="onSelectFileType" 
+          data-value="all"
+        >
+          <text>全部文件</text>
+        </view>
+        <view 
+          class="popup-option {{selectedFileType === 'doc' ? 'active' : ''}}" 
+          bindtap="onSelectFileType" 
+          data-value="doc"
+        >
+          <text>📄 仅文献</text>
+        </view>
+        <view 
+          class="popup-option {{selectedFileType === 'code' ? 'active' : ''}}" 
+          bindtap="onSelectFileType" 
+          data-value="code"
+        >
+          <text>💻 仅代码</text>
+        </view>
+        <view 
+          class="popup-option {{selectedFileType === 'both' ? 'active' : ''}}" 
+          bindtap="onSelectFileType" 
+          data-value="both"
+        >
+          <text>📄💻 文献与代码</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,21 @@
+{
+  "compileType": "miniwidget",
+  "libVersion": "3.120.0",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "setting": {
+    "minified": true,
+    "urlCheck": false,
+    "useNewDevtools": false,
+    "useNewCompiler": true
+  },
+  "condition": {},
+  "editorSetting": {
+    "tabIndent": "auto",
+    "tabSize": 2
+  },
+  "appid": "YOUR_APPID_HERE",
+  "projectName": "学术资源分享小组件"
+}
