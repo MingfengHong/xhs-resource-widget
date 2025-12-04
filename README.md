@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/platform-小红书小组件-FF2442?style=flat-square" alt="Platform">
-  <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="License">
+  <img src="https://img.shields.io/badge/license-Mulan%20PSL%20v2-blue?style=flat-square" alt="License">
   <img src="https://img.shields.io/badge/version-0.1.0-blue?style=flat-square" alt="Version">
 </p>
 
@@ -149,7 +149,7 @@ const REMOTE_DATA_URL = 'https://your-bucket.cos.region.myqcloud.com/resources.j
 
 ## 📄 开源协议
 
-本项目基于 [MIT License](LICENSE) 开源。
+本项目基于 [木兰宽松许可证, 第2版 (Mulan PSL v2)](LICENSE) 开源。
 
 ## ⚠️ 免责声明
 
