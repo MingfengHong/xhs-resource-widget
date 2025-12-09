@@ -133,6 +133,7 @@
     <!-- 底部免责声明 -->
     <view class="footer">
       <text class="footer-text">仅供学术交流使用</text>
+      <text class="footer-author">🍠 @汤圆键盘坏了不能写论文</text>
     </view>
   </scroll-view>
 
