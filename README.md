@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <b>🍠 由小红书 <a href="https://www.xiaohongshu.com/user/profile/5af2c7574eacab7b5765830d">@汤圆键盘坏了不能写论文</a> 开发</b>
+  <b>🍠 由小红书 <a href="https://xhslink.com/m/8hVv9FFnXQj">@汤圆键盘坏了不能写论文</a> 开发</b>
 </p>
 
 ---
@@ -143,7 +143,7 @@ const REMOTE_DATA_URL = 'https://your-bucket.cos.region.myqcloud.com/resources.j
 
 ## 👨‍💻 作者
 
-🍠 **@汤圆键盘坏了不能写论文** - [小红书主页](https://www.xiaohongshu.com/user/profile/5af2c7574eacab7b5765830d)
+🍠 **@汤圆键盘坏了不能写论文** - [小红书主页](https://xhslink.com/m/8hVv9FFnXQj)
 
 ## 🤝 贡献
 
