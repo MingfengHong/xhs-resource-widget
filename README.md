@@ -11,6 +11,10 @@
   无需后端服务，数据托管在对象存储，支持热更新。
 </p>
 
+<p align="center">
+  <b>🍠 由小红书 <a href="https://www.xiaohongshu.com/user/profile/5af2c7574eacab7b5765830d">@汤圆键盘坏了不能写论文</a> 开发</b>
+</p>
+
 ---
 
 ## ✨ 特性
@@ -137,9 +141,13 @@ const REMOTE_DATA_URL = 'https://your-bucket.cos.region.myqcloud.com/resources.j
 
 > 💡 建议同步更新 `LOCAL_FALLBACK_DATA` 作为离线备用
 
+## 👨‍💻 作者
+
+🍠 **@汤圆键盘坏了不能写论文** - [小红书主页](https://www.xiaohongshu.com/user/profile/5af2c7574eacab7b5765830d)
+
 ## 🤝 贡献
 
-个人开发的玩具，欢迎提交 Issue 和 Pull Request！
+欢迎提交 Issue 和 Pull Request！
 
 1. Fork 本仓库
 2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
